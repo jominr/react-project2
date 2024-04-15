@@ -8,8 +8,6 @@ const Meals = (props) => {
       {props.mealsData.map(item => <Meal
         key={item.id}
         meal={item}
-        onAdd={props.onAdd}
-        onSub={props.onSub}
       />
       )}
     </div>
