@@ -9,10 +9,10 @@ const Meal = (props) => {
       <div className={classes.imgBox}>
         <img src={img} alt="汉堡包" />
       </div>
-
-      <div>
+    
+      <div className={classes.contentBox}>
         <h2 className={classes.title}>{title}</h2>
-        <p className={classes.description}>{desc}</p>
+        {props.noDesc ? null : <p className={classes.description}>{desc}</p>}
         <div className={classes.priceWrap}>
           <span className={classes.price}>{price}</span>
           <Counter

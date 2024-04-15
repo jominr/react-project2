@@ -1,14 +1,31 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import classes from './Cart.module.css';
 import iconImg from '../../asset/bag.png';
 import CartContext from '../../store/cart-context';
+import CartDetails from './CartDetails/CartDetails';
 
 const Cart = () => {
 
     const ctx = useContext(CartContext);
+    const [showDetails, setShowDetails] = useState(false);
+    const cartDetailsHander = () => {
+      if (ctx.totalAmount === 0) {
+        setShowDetails(false);
+      } else {
+        setShowDetails(preState => !preState);
+      }
+    }
+    useEffect(()=> {
+      if (ctx.totalAmount === 0) {
+        setShowDetails(false);
+      }
+    }, [ctx.totalAmount])
 
     return (
-        <div className={classes.Cart}>
+        <div className={classes.Cart} onClick={cartDetailsHander}>
+
+            {showDetails && <CartDetails />}
+
             <div className={classes.Icon}>
                 <img src={iconImg}/>
                 {ctx.totalAmount === 0 ? null : <span className={classes.TotalAmount}>{ctx.totalAmount}</span>}

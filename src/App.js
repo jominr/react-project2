@@ -94,9 +94,20 @@ function App() {
     const newMealsData = MEALS_DATA.filter(item => item.title.indexOf(keyWord) !== -1);
     setMealsData(newMealsData);
   }
+
+  const clearCart = () => {
+    const newCart = {...cartData};
+    // 将购物车中商品的数量清0
+    newCart.items.forEach(item => delete item.amount);
+    newCart.items = [];
+    newCart.totalAmount = 0;
+    newCart.totalPrice = 0;
+
+    setCartData(newCart);
+};
   
   return (
-    <CartContext.Provider value={{...cartData, addItem, subItem}}>
+    <CartContext.Provider value={{...cartData, addItem, subItem, clearCart}}>
       <div>
         <FilterMeals onFilter={handleFilter}/>
         <Meals mealsData={mealsData}/>
