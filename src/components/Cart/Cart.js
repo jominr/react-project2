@@ -23,7 +23,7 @@ const Cart = () => {
         setShowDetails(false);
         setShowCheckout(false);
       }
-    }, [ctx.totalAmount])
+    }, [ctx])
 
     const showCheckoutHandler = () => {
       if(ctx.totalAmount === 0) return;
