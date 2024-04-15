@@ -3,7 +3,7 @@ import classes from './Meal.module.css';
 import Counter from '../../UI/Counter/Counter'
 
 const Meal = (props) => {
-  const {meal: {img, title, desc, price, amount}} = props;
+  const {meal: {img, title, desc, price}} = props;
   return (
     <div className={classes.meal}>
       <div className={classes.imgBox}>
