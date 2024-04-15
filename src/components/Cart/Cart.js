@@ -3,11 +3,14 @@ import classes from './Cart.module.css';
 import iconImg from '../../asset/bag.png';
 import CartContext from '../../store/cart-context';
 import CartDetails from './CartDetails/CartDetails';
+import Checkout from './Checkout/Checkout'
 
 const Cart = () => {
 
     const ctx = useContext(CartContext);
     const [showDetails, setShowDetails] = useState(false);
+    const [showCheckout, setShowCheckout] = useState(false);
+
     const cartDetailsHander = () => {
       if (ctx.totalAmount === 0) {
         setShowDetails(false);
@@ -18,11 +21,23 @@ const Cart = () => {
     useEffect(()=> {
       if (ctx.totalAmount === 0) {
         setShowDetails(false);
+        setShowCheckout(false);
       }
     }, [ctx.totalAmount])
 
+    const showCheckoutHandler = () => {
+      if(ctx.totalAmount === 0) return;
+      setShowCheckout(true);
+    };
+
+    const hideCheckoutHandler = () => {
+      setShowCheckout(false);
+    };
+
     return (
         <div className={classes.Cart} onClick={cartDetailsHander}>
+
+            {showCheckout && <Checkout onHide={hideCheckoutHandler}/>}
 
             {showDetails && <CartDetails />}
 
@@ -33,7 +48,9 @@ const Cart = () => {
 
             {ctx.totalAmount === 0 ? <p className={classes.NoMeal}>未选购商品</p> : <p className={classes.Price}>{ctx.totalPrice}</p>}
 
-            <button className={`${classes.Button} ${ctx.totalAmount === 0 ? classes.Disabled : ''}`}>去结算</button>
+            <button
+              onClick={showCheckoutHandler}
+              className={`${classes.Button} ${ctx.totalAmount === 0 ? classes.Disabled : ''}`}>去结算</button>
         </div>
     );
 };
