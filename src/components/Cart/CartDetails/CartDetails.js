@@ -21,7 +21,8 @@ const CartDetails = () => {
 
   const okHandler = (e) => {
       // 清空购物车
-      ctx.clearCart();
+      // ctx.clearCart();
+      ctx.cartDispatch({type:'clearCart'})
   };
 
   return (

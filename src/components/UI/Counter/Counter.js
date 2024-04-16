@@ -9,10 +9,12 @@ const Counter = (props) => {
   const ctx = useContext(CartContext)
 
   const addButtonHandler = () => {
-    ctx.addItem(props.meal);
+    // ctx.addItem(props.meal);
+    ctx.cartDispatch({type: 'addItem', meal: props.meal});
   }
   const subButtonHandler = () => {
-    ctx.subItem(props.meal);
+    // ctx.subItem(props.meal);
+    ctx.cartDispatch({type: 'subItem', meal: props.meal});
   }
   return (
     <div className={classes.counter}>
